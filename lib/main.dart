@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:makobili/screens/accounts_screen.dart';
+import 'package:makobili/screens/home_screen.dart';
+import 'package:makobili/screens/reports_screen.dart';
+import 'package:makobili/screens/settings_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -70,14 +74,10 @@ class _MyHomePageState extends State<MyHomePage> {
 
   // List of widgets to show in the body based on selected tab
   static List<Widget> _widgetOptions = <Widget>[
-    Text('Home Page',
-        style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
-    Text('Accounts Page',
-        style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
-    Text('Reports Page',
-        style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
-    Text('Settings Page',
-        style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
+    HomeScreen(),
+    AccountsScreen(),
+    ReportsScreen(),
+    SettingsScreen(),
   ];
 
   void _onItemTapped(int index) {
