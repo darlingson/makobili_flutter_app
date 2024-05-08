@@ -8,12 +8,18 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(children: [
       SizedBox(
-        height: 200,
+        height: 250,
         child: ListView.builder(
           scrollDirection: Axis.horizontal,
           itemCount: 10,
           itemBuilder: (context, index) {
-            return BalanceCard(index: index);
+            return BalanceCard(
+              index: index,
+              accountName: 'Account ${index + 1}',
+              accountNumber: '1234 5678 9012 345${index + 1}',
+              institution: 'Bank ${index + 1}',
+              accountType: 'Savings',
+            );
           },
         ),
       )
