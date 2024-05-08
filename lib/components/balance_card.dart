@@ -24,6 +24,11 @@ class BalanceCard extends StatelessWidget {
         color: Colors.blue[100],
         elevation: 5,
         margin: const EdgeInsets.all(8),
+        shape: RoundedRectangleBorder(
+          borderRadius:
+              BorderRadius.circular(4.0), // Small radius for minimal rounding
+          side: const BorderSide(color: Colors.black87, width: 1.0), // Border
+        ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
