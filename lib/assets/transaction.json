@@ -1,0 +1,217 @@
+[
+    {
+      "id": "national_bank_account_1",
+      "name": "National Bank Account 1",
+      "accountNumber": "123456789",
+      "institution": "National Bank",
+      "type": "Savings",
+      "balance": 5000.00,
+      "transactions": [
+        {
+          "id": "txn_1",
+          "description": "Deposit",
+          "amount": 1000.00,
+          "date": "2024-04-30T12:00:00Z"
+        },
+        {
+          "id": "txn_2",
+          "description": "Withdrawal",
+          "amount": 500.00,
+          "date": "2024-04-25T12:00:00Z"
+        },
+        {
+          "id": "txn_3",
+          "description": "Payment",
+          "amount": 250.00,
+          "date": "2024-04-20T12:00:00Z"
+        },
+        {
+          "id": "txn_4",
+          "description": "Transfer",
+          "amount": 350.00,
+          "date": "2024-04-15T12:00:00Z"
+        },
+        {
+          "id": "txn_5",
+          "description": "Deposit",
+          "amount": 700.00,
+          "date": "2024-04-10T12:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "national_bank_account_2",
+      "name": "National Bank Account 2",
+      "accountNumber": "987654321",
+      "institution": "National Bank",
+      "type": "Current",
+      "balance": 10000.00,
+      "transactions": [
+        {
+          "id": "txn_1",
+          "description": "Withdrawal",
+          "amount": 200.00,
+          "date": "2024-04-30T12:00:00Z"
+        },
+        {
+          "id": "txn_2",
+          "description": "Payment",
+          "amount": 300.00,
+          "date": "2024-04-25T12:00:00Z"
+        },
+        {
+          "id": "txn_3",
+          "description": "Deposit",
+          "amount": 800.00,
+          "date": "2024-04-20T12:00:00Z"
+        },
+        {
+          "id": "txn_4",
+          "description": "Withdrawal",
+          "amount": 400.00,
+          "date": "2024-04-15T12:00:00Z"
+        },
+        {
+          "id": "txn_5",
+          "description": "Payment",
+          "amount": 600.00,
+          "date": "2024-04-10T12:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "airtel_money_account",
+      "name": "Airtel Money Account",
+      "accountNumber": "555555555",
+      "institution": "Airtel Money",
+      "type": "Mobile Money",
+      "balance": 2000.00,
+      "transactions": [
+        {
+          "id": "txn_1",
+          "description": "Top-up",
+          "amount": 300.00,
+          "date": "2024-04-30T12:00:00Z"
+        },
+        {
+          "id": "txn_2",
+          "description": "Payment",
+          "amount": 150.00,
+          "date": "2024-04-25T12:00:00Z"
+        },
+        {
+          "id": "txn_3",
+          "description": "Withdrawal",
+          "amount": 200.00,
+          "date": "2024-04-20T12:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "tnm_mpamba_account",
+      "name": "TNM Mpamba Account",
+      "accountNumber": "777777777",
+      "institution": "TNM Mpamba",
+      "type": "Mobile Money",
+      "balance": 3000.00,
+      "transactions": [
+        {
+          "id": "txn_1",
+          "description": "Top-up",
+          "amount": 500.00,
+          "date": "2024-04-30T12:00:00Z"
+        },
+        {
+          "id": "txn_2",
+          "description": "Withdrawal",
+          "amount": 200.00,
+          "date": "2024-04-25T12:00:00Z"
+        },
+        {
+          "id": "txn_3",
+          "description": "Payment",
+          "amount": 150.00,
+          "date": "2024-04-20T12:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "nbs_bank_account",
+      "name": "NBS Bank Account",
+      "accountNumber": "222222222",
+      "institution": "NBS Bank",
+      "type": "Savings",
+      "balance": 7000.00,
+      "transactions": [
+        {
+          "id": "txn_1",
+          "description": "Deposit",
+          "amount": 1000.00,
+          "date": "2024-04-30T12:00:00Z"
+        },
+        {
+          "id": "txn_2",
+          "description": "Withdrawal",
+          "amount": 500.00,
+          "date": "2024-04-25T12:00:00Z"
+        },
+        {
+          "id": "txn_3",
+          "description": "Payment",
+          "amount": 250.00,
+          "date": "2024-04-20T12:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "fdh_bank_account",
+      "name": "FDH Bank Account",
+      "accountNumber": "888888888",
+      "institution": "FDH Bank",
+      "type": "Savings",
+      "balance": 15000.00,
+      "transactions": [
+        {
+          "id": "txn_1",
+          "description": "Deposit",
+          "amount": 1000.00,
+          "date": "2024-04-30T12:00:00Z"
+        },
+        {
+          "id": "txn_2",
+          "description": "Withdrawal",
+          "amount": 500.00,
+          "date": "2024-04-25T12:00:00Z"
+        }
+      ]
+    },
+    {
+      "id": "fcb_merchant_account",
+      "name": "FCB Bank Merchant Account",
+      "accountNumber": "444444444",
+      "institution": "FCB Bank",
+      "type": "Merchant",
+      "balance": 50000.00,
+      "transactions": [
+        {
+          "id": "txn_1",
+          "description": "Payment",
+          "amount": 1000.00,
+          "date": "2024-04-30T12:00:00Z"
+        },
+        {
+          "id": "txn_2",
+          "description": "Deposit",
+          "amount": 5000.00,
+          "date": "2024-04-25T12:00:00Z"
+        },
+        {
+          "id": "txn_3",
+          "description": "Withdrawal",
+          "amount": 2500.00,
+          "date": "2024-04-20T12:00:00Z"
+        }
+      ]
+    }
+  ]
+  
