@@ -19,26 +19,27 @@ class BalanceCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 320,
+      width: 350,
       child: Card(
-        color: Colors.blue[100], // Light blue card color for the theme
+        color: Colors.blue[100],
+        elevation: 5,
+        margin: const EdgeInsets.all(8),
         child: Padding(
-          padding: EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text('Account Name: $accountName',
-                  style: TextStyle(fontSize: 16)),
+                  style: const TextStyle(fontSize: 16)),
               Text('Account Number: $accountNumber',
-                  style: TextStyle(fontSize: 16)),
-              Text('Institution: $institution', style: TextStyle(fontSize: 16)),
+                  style: const TextStyle(fontSize: 16)),
+              Text('Institution: $institution',
+                  style: const TextStyle(fontSize: 16)),
               Text('Account Type: $accountType',
-                  style: TextStyle(fontSize: 16)),
+                  style: const TextStyle(fontSize: 16)),
             ],
           ),
         ),
-        elevation: 5, // Shadow depth
-        margin: EdgeInsets.all(8), // Margin around each card
       ),
     );
   }
