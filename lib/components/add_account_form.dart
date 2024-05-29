@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/account.dart';
-import '../utils/database_helper.dart'; // Make sure to import your DatabaseHelper
+import '../models/institution.dart';
+import '../utils/database_helper.dart';
 
 class AddAccountForm extends StatefulWidget {
   @override
@@ -12,9 +13,24 @@ class _AddAccountFormState extends State<AddAccountForm> {
 
   String _name = '';
   String _accountNumber = '';
-  String _institution = '';
+  String? _selectedInstitution;
   String _type = '';
   double _balance = 0.0;
+  List<Institution> _institutions = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchInstitutions();
+  }
+
+  Future<void> _fetchInstitutions() async {
+    final institutions = await DatabaseHelper.instance.fetchInstitutions();
+    setState(() {
+      _institutions = institutions;
+      print('institutions: $_institutions');
+    });
+  }
 
   Future<void> _saveAccount() async {
     if (_formKey.currentState!.validate()) {
@@ -24,7 +40,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
         id: DateTime.now().millisecondsSinceEpoch.toString(),
         name: _name,
         accountNumber: _accountNumber,
-        institution: _institution,
+        institution: _selectedInstitution!,
         type: _type,
         balance: _balance,
         transactions: [],
@@ -69,16 +85,28 @@ class _AddAccountFormState extends State<AddAccountForm> {
                   _accountNumber = value!;
                 },
               ),
-              TextFormField(
+              DropdownButtonFormField<String>(
                 decoration: InputDecoration(labelText: 'Institution'),
+                value: _selectedInstitution,
+                items: _institutions.map((Institution institution) {
+                  return DropdownMenuItem<String>(
+                    value: institution.id,
+                    child: Text(institution.name),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _selectedInstitution = value;
+                  });
+                },
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter the institution';
+                  if (value == null) {
+                    return 'Please select an institution';
                   }
                   return null;
                 },
                 onSaved: (value) {
-                  _institution = value!;
+                  _selectedInstitution = value!;
                 },
               ),
               TextFormField(

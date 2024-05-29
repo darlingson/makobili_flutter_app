@@ -67,6 +67,35 @@ class DatabaseHelper {
         type TEXT
       )
     ''');
+    await _insertInitialData(db);
+  }
+
+  Future<void> _insertInitialData(Database db) async {
+    // Define initial institutions
+    final List<Institution> institutions = [
+      Institution(id: '1', name: 'National Bank', type: 'Bank'),
+      Institution(id: '2', name: 'Standard Bank', type: 'Bank'),
+      Institution(id: '3', name: 'FDH Bank', type: 'Bank'),
+      Institution(id: '4', name: 'Airtel', type: 'Mobile Money'),
+      Institution(id: '5', name: 'TNM', type: 'Mobile Money'),
+    ];
+
+    // Define initial categories
+    final List<Category> categories = [
+      Category(id: '1', name: 'Food'),
+      Category(id: '2', name: 'Entertainment'),
+      Category(id: '3', name: 'Utilities'),
+    ];
+
+    // Insert institutions
+    for (var institution in institutions) {
+      await db.insert('institutions', institution.toJson());
+    }
+
+    // Insert categories
+    for (var category in categories) {
+      await db.insert('categories', category.toJson());
+    }
   }
 
   // Insert Account

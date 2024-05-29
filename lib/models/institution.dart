@@ -13,6 +13,7 @@ class Institution {
     return {
       'id': id,
       'name': name,
+      'type': type,
     };
   }
 

@@ -3,8 +3,25 @@ import 'package:makobili/screens/accounts_screen.dart';
 import 'package:makobili/screens/home_screen.dart';
 import 'package:makobili/screens/reports_screen.dart';
 import 'package:makobili/screens/transactions_screen.dart';
+import 'package:makobili/utils/database_helper.dart';
+import 'package:path/path.dart';
+import 'package:sqflite/sqflite.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Check if the database exists
+  final dbPath = await getDatabasesPath();
+  final path = join(dbPath, 'transactions.db');
+  final database_exists = await databaseExists(path);
+
+  if (!database_exists) {
+    print('Creating new database at $path');
+    // Initialize the database
+    await DatabaseHelper.instance.database;
+  } else {
+    print('Database already exists at $path');
+  }
   runApp(const MyApp());
 }
 

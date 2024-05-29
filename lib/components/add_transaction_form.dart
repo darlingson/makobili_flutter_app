@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import '../models/transaction.dart';
-import '../utils/database_helper.dart'; // Make sure to import your DatabaseHelper
+import '../models/category.dart';
+import '../utils/database_helper.dart';
+import 'package:intl/intl.dart';
 
 class AddTransactionForm extends StatefulWidget {
   @override
@@ -14,11 +15,25 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
   String _accountId = '';
   String _description = '';
   double _amount = 0.0;
-  String _category = '';
+  String? _selectedCategory;
   String _direction = '';
   DateTime _date = DateTime.now();
 
   final DateFormat _dateFormat = DateFormat('yyyy-MM-dd');
+  List<Category> _categories = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchCategories();
+  }
+
+  Future<void> _fetchCategories() async {
+    final categories = await DatabaseHelper.instance.fetchCategories();
+    setState(() {
+      _categories = categories;
+    });
+  }
 
   Future<void> _saveTransaction() async {
     if (_formKey.currentState!.validate()) {
@@ -29,7 +44,7 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
         accountId: _accountId,
         description: _description,
         amount: _amount,
-        category: _category,
+        category: _selectedCategory!,
         direction: _direction,
         date: _date,
       );
@@ -50,7 +65,7 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
           child: Column(
             children: <Widget>[
               TextFormField(
-                decoration: const InputDecoration(labelText: 'Account ID'),
+                decoration: InputDecoration(labelText: 'Account ID'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the account ID';
@@ -62,7 +77,7 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                 },
               ),
               TextFormField(
-                decoration: const InputDecoration(labelText: 'Description'),
+                decoration: InputDecoration(labelText: 'Description'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a description';
@@ -74,7 +89,7 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                 },
               ),
               TextFormField(
-                decoration: const InputDecoration(labelText: 'Amount'),
+                decoration: InputDecoration(labelText: 'Amount'),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -86,23 +101,35 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                   _amount = double.parse(value!);
                 },
               ),
-              TextFormField(
-                decoration: const InputDecoration(labelText: 'Category'),
+              DropdownButtonFormField<String>(
+                decoration: InputDecoration(labelText: 'Category'),
+                value: _selectedCategory,
+                items: _categories.map((Category category) {
+                  return DropdownMenuItem<String>(
+                    value: category.id,
+                    child: Text(category.name),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _selectedCategory = value;
+                  });
+                },
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a category';
+                  if (value == null) {
+                    return 'Please select a category';
                   }
                   return null;
                 },
                 onSaved: (value) {
-                  _category = value!;
+                  _selectedCategory = value!;
                 },
               ),
               TextFormField(
-                decoration: const InputDecoration(labelText: 'Direction'),
+                decoration: InputDecoration(labelText: 'Direction'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
-                    return 'Please enter a direction';
+                    return 'Please enter the transaction direction';
                   }
                   return null;
                 },
@@ -111,30 +138,27 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                 },
               ),
               TextFormField(
-                decoration: const InputDecoration(
-                  labelText: 'Date',
-                  hintText: 'YYYY-MM-DD',
-                ),
-                keyboardType: TextInputType.datetime,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a date';
-                  }
-                  try {
-                    _date = _dateFormat.parse(value);
-                  } catch (e) {
-                    return 'Please enter a valid date';
-                  }
-                  return null;
-                },
-                onSaved: (value) {
-                  _date = _dateFormat.parse(value!);
+                decoration: InputDecoration(labelText: 'Date'),
+                controller:
+                    TextEditingController(text: _dateFormat.format(_date)),
+                readOnly: true,
+                onTap: () async {
+                  DateTime? pickedDate = await showDatePicker(
+                    context: context,
+                    initialDate: _date,
+                    firstDate: DateTime(2000),
+                    lastDate: DateTime(2101),
+                  );
+                  if (pickedDate != null && pickedDate != _date)
+                    setState(() {
+                      _date = pickedDate;
+                    });
                 },
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _saveTransaction,
-                child: const Text('Add Transaction'),
+                child: Text('Add Transaction'),
               ),
             ],
           ),
