@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:makobili/screens/accounts_screen.dart';
 import 'package:makobili/screens/home_screen.dart';
 import 'package:makobili/screens/reports_screen.dart';
-import 'package:makobili/screens/transactions.dart';
+import 'package:makobili/screens/transactions_screen.dart';
 
 void main() {
   runApp(const MyApp());
