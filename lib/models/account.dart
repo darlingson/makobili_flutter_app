@@ -7,7 +7,7 @@ class Account {
   final String institution;
   final String type;
   final double balance;
-  final List<Transaction> transactions;
+  final List<BankTransaction> transactions;
 
   Account({
     required this.id,
@@ -41,7 +41,7 @@ class Account {
       type: json['type'],
       balance: json['balance'],
       transactions: (json['transactions'] as List<dynamic>)
-          .map((transactionJson) => Transaction.fromJson(transactionJson))
+          .map((transactionJson) => BankTransaction.fromJson(transactionJson))
           .toList(),
     );
   }

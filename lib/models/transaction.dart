@@ -1,4 +1,4 @@
-class Transaction {
+class BankTransaction {
   final String id;
   final String accountId;
   final String description;
@@ -7,7 +7,7 @@ class Transaction {
   final String direction;
   final DateTime date;
 
-  Transaction({
+  BankTransaction({
     required this.id,
     required this.accountId,
     required this.description,
@@ -29,8 +29,8 @@ class Transaction {
     };
   }
 
-  factory Transaction.fromJson(Map<String, dynamic> json) {
-    return Transaction(
+  factory BankTransaction.fromJson(Map<String, dynamic> json) {
+    return BankTransaction(
       id: json['id'],
       accountId: json['accountId'],
       description: json['description'],
