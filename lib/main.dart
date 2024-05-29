@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:makobili/screens/accounts_screen.dart';
 import 'package:makobili/screens/home_screen.dart';
 import 'package:makobili/screens/reports_screen.dart';
-import 'package:makobili/screens/settings_screen.dart';
+import 'package:makobili/screens/transactions.dart';
 
 void main() {
   runApp(const MyApp());
@@ -76,8 +76,8 @@ class _MyHomePageState extends State<MyHomePage> {
   static List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
     AccountsScreen(),
+    TransactionsScreen(),
     ReportsScreen(),
-    SettingsScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -102,16 +102,16 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.account_balance_wallet),
+            icon: Icon(Icons.money),
             label: 'Accounts',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.shopping_bag_sharp),
+            label: 'Transactions',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.bar_chart),
             label: 'Reports',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Settings',
           ),
         ],
         currentIndex: _selectedIndex,
