@@ -10,7 +10,7 @@ class ReportsScreen extends StatefulWidget {
 class _ReportsScreenState extends State<ReportsScreen> {
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text('Reports Page',
           style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold)),
     );
