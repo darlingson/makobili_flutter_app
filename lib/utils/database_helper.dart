@@ -1,7 +1,9 @@
-import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import '../models/transaction.dart';
+import 'package:sqflite/sqflite.dart';
 import '../models/account.dart';
+import '../models/transaction.dart';
+import '../models/category.dart';
+import '../models/institution.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._init();
@@ -30,9 +32,10 @@ class DatabaseHelper {
         id TEXT PRIMARY KEY,
         name TEXT,
         accountNumber TEXT,
-        institution TEXT,
+        institutionId TEXT,
         type TEXT,
-        balance REAL
+        balance REAL,
+        FOREIGN KEY (institutionId) REFERENCES institutions(id) ON DELETE CASCADE
       )
     ''');
 
@@ -42,10 +45,26 @@ class DatabaseHelper {
         accountId TEXT,
         description TEXT,
         amount REAL,
-        category TEXT,
+        categoryId TEXT,
         direction TEXT,
         date TEXT,
-        FOREIGN KEY (accountId) REFERENCES accounts(id) ON DELETE CASCADE
+        FOREIGN KEY (accountId) REFERENCES accounts(id) ON DELETE CASCADE,
+        FOREIGN KEY (categoryId) REFERENCES categories(id) ON DELETE CASCADE
+      )
+    ''');
+
+    await db.execute('''
+      CREATE TABLE categories(
+        id TEXT PRIMARY KEY,
+        name TEXT
+      )
+    ''');
+
+    await db.execute('''
+      CREATE TABLE institutions(
+        id TEXT PRIMARY KEY,
+        name TEXT,
+        type TEXT
       )
     ''');
   }
@@ -64,6 +83,20 @@ class DatabaseHelper {
         conflictAlgorithm: ConflictAlgorithm.replace);
   }
 
+  // Insert Category
+  Future<void> insertCategory(Category category) async {
+    final db = await instance.database;
+    await db.insert('categories', category.toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+  // Insert Institution
+  Future<void> insertInstitution(Institution institution) async {
+    final db = await instance.database;
+    await db.insert('institutions', institution.toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
   // Fetch all accounts
   Future<List<Account>> fetchAccounts() async {
     final db = await instance.database;
@@ -78,6 +111,22 @@ class DatabaseHelper {
     final result = await db.query('transactions');
 
     return result.map((json) => BankTransaction.fromJson(json)).toList();
+  }
+
+  // Fetch all categories
+  Future<List<Category>> fetchCategories() async {
+    final db = await instance.database;
+    final result = await db.query('categories');
+
+    return result.map((json) => Category.fromJson(json)).toList();
+  }
+
+  // Fetch all institutions
+  Future<List<Institution>> fetchInstitutions() async {
+    final db = await instance.database;
+    final result = await db.query('institutions');
+
+    return result.map((json) => Institution.fromJson(json)).toList();
   }
 
   // Fetch transactions by account ID
@@ -104,6 +153,20 @@ class DatabaseHelper {
         where: 'id = ?', whereArgs: [transaction.id]);
   }
 
+  // Update Category
+  Future<void> updateCategory(Category category) async {
+    final db = await instance.database;
+    await db.update('categories', category.toJson(),
+        where: 'id = ?', whereArgs: [category.id]);
+  }
+
+  // Update Institution
+  Future<void> updateInstitution(Institution institution) async {
+    final db = await instance.database;
+    await db.update('institutions', institution.toJson(),
+        where: 'id = ?', whereArgs: [institution.id]);
+  }
+
   // Delete Account
   Future<void> deleteAccount(String id) async {
     final db = await instance.database;
@@ -114,6 +177,18 @@ class DatabaseHelper {
   Future<void> deleteTransaction(String id) async {
     final db = await instance.database;
     await db.delete('transactions', where: 'id = ?', whereArgs: [id]);
+  }
+
+  // Delete Category
+  Future<void> deleteCategory(String id) async {
+    final db = await instance.database;
+    await db.delete('categories', where: 'id = ?', whereArgs: [id]);
+  }
+
+  // Delete Institution
+  Future<void> deleteInstitution(String id) async {
+    final db = await instance.database;
+    await db.delete('institutions', where: 'id = ?', whereArgs: [id]);
   }
 
   Future close() async {
