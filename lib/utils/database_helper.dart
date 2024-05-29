@@ -32,10 +32,10 @@ class DatabaseHelper {
         id TEXT PRIMARY KEY,
         name TEXT,
         accountNumber TEXT,
-        institutionId TEXT,
+        institution TEXT,
         type TEXT,
         balance REAL,
-        FOREIGN KEY (institutionId) REFERENCES institutions(id) ON DELETE CASCADE
+        FOREIGN KEY (institution) REFERENCES institutions(id) ON DELETE CASCADE
       )
     ''');
 

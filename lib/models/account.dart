@@ -1,5 +1,3 @@
-import 'package:makobili/models/transaction.dart';
-
 class Account {
   final String id;
   final String name;
@@ -7,7 +5,6 @@ class Account {
   final String institution;
   final String type;
   final double balance;
-  final List<BankTransaction> transactions;
 
   Account({
     required this.id,
@@ -16,7 +13,6 @@ class Account {
     required this.institution,
     required this.type,
     required this.balance,
-    required this.transactions,
   });
 
   Map<String, dynamic> toJson() {
@@ -27,8 +23,6 @@ class Account {
       'institution': institution,
       'type': type,
       'balance': balance,
-      'transactions':
-          transactions.map((transaction) => transaction.toJson()).toList(),
     };
   }
 
@@ -40,9 +34,6 @@ class Account {
       institution: json['institution'],
       type: json['type'],
       balance: json['balance'],
-      transactions: (json['transactions'] as List<dynamic>)
-          .map((transactionJson) => BankTransaction.fromJson(transactionJson))
-          .toList(),
     );
   }
 }

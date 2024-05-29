@@ -34,25 +34,24 @@ class _AccountsScreenState extends State<AccountsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {
-            _showAddAccountDialog(context);
-          },
-          child: const Icon(Icons.add),
-        ),
-        body: Expanded(
-          child: ListView.builder(
-            itemBuilder: (context, index) {
-              return BalanceCard(
-                index: index,
-                accountName: 'Account ${index + 1}',
-                accountNumber: '1234 5678 9012 345${index + 1}',
-                institution: 'Bank ${index + 1}',
-                accountType: 'Savings',
-              );
-            },
-            itemCount: 10,
-          ),
-        ));
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          _showAddAccountDialog(context);
+        },
+        child: const Icon(Icons.add),
+      ),
+      body: ListView.builder(
+        itemBuilder: (context, index) {
+          return BalanceCard(
+            index: index,
+            accountName: 'Account ${index + 1}',
+            accountNumber: '1234 5678 9012 345${index + 1}',
+            institution: 'Bank ${index + 1}',
+            accountType: 'Savings',
+          );
+        },
+        itemCount: 10,
+      ),
+    );
   }
 }

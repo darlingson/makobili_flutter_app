@@ -43,7 +43,6 @@ class _AddAccountFormState extends State<AddAccountForm> {
         institution: _selectedInstitution!,
         type: _type,
         balance: _balance,
-        transactions: [],
       );
 
       await DatabaseHelper.instance.insertAccount(account);
