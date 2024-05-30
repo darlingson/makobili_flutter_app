@@ -45,11 +45,11 @@ class DatabaseHelper {
         accountId TEXT,
         description TEXT,
         amount REAL,
-        categoryId TEXT,
+        category TEXT,
         direction TEXT,
         date TEXT,
         FOREIGN KEY (accountId) REFERENCES accounts(id) ON DELETE CASCADE,
-        FOREIGN KEY (categoryId) REFERENCES categories(id) ON DELETE CASCADE
+        FOREIGN KEY (category) REFERENCES categories(id) ON DELETE CASCADE
       )
     ''');
 

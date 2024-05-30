@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:makobili/models/account.dart';
 import '../models/transaction.dart';
 import '../models/category.dart';
 import '../utils/database_helper.dart';
@@ -12,7 +13,7 @@ class AddTransactionForm extends StatefulWidget {
 class _AddTransactionFormState extends State<AddTransactionForm> {
   final _formKey = GlobalKey<FormState>();
 
-  String _accountId = '';
+  String? _accountId;
   String _description = '';
   double _amount = 0.0;
   String? _selectedCategory;
@@ -21,11 +22,12 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
 
   final DateFormat _dateFormat = DateFormat('yyyy-MM-dd');
   List<Category> _categories = [];
-
+  List<Account> _accountIDs = [];
   @override
   void initState() {
     super.initState();
     _fetchCategories();
+    _fetchAccounts();
   }
 
   Future<void> _fetchCategories() async {
@@ -35,13 +37,21 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
     });
   }
 
+  Future<void> _fetchAccounts() async {
+    final accounts = await DatabaseHelper.instance.fetchAccounts();
+    print(accounts[0].toJson());
+    setState(() {
+      _accountIDs = accounts;
+    });
+  }
+
   Future<void> _saveTransaction() async {
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
 
       final transaction = BankTransaction(
         id: DateTime.now().millisecondsSinceEpoch.toString(),
-        accountId: _accountId,
+        accountId: _accountId!,
         description: _description,
         amount: _amount,
         category: _selectedCategory!,
@@ -61,14 +71,27 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
       key: _formKey,
       child: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(8.0),
           child: Column(
             children: <Widget>[
-              TextFormField(
-                decoration: InputDecoration(labelText: 'Account ID'),
+              DropdownButtonFormField<String>(
+                decoration: InputDecoration(labelText: 'Accounts'),
+                value: _accountId,
+                items: _accountIDs.map((Account account) {
+                  print('category: $account');
+                  return DropdownMenuItem<String>(
+                    value: account.id,
+                    child: Text(account.name),
+                  );
+                }).toList(),
+                onChanged: (value) {
+                  setState(() {
+                    _accountId = value;
+                  });
+                },
                 validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter the account ID';
+                  if (value == null) {
+                    return 'Please select a Account';
                   }
                   return null;
                 },
