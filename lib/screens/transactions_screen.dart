@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:makobili/components/add_transaction_form.dart';
+import 'package:makobili/components/trans_asctions_tabs/AllTab.dart';
+import 'package:makobili/components/trans_asctions_tabs/CategoriesTab.dart';
+import 'package:makobili/components/trans_asctions_tabs/ThisMonthTab.dart';
 
 class TransactionsScreen extends StatelessWidget {
   const TransactionsScreen({Key? key}) : super(key: key);
@@ -51,48 +54,6 @@ class TransactionsScreen extends StatelessWidget {
             AllTab(),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class CategoriesTab extends StatelessWidget {
-  const CategoriesTab({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-        'Categories Page',
-        style: TextStyle(fontSize: 20),
-      ),
-    );
-  }
-}
-
-class ThisMonthTab extends StatelessWidget {
-  const ThisMonthTab({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-        'This Month Page',
-        style: TextStyle(fontSize: 20),
-      ),
-    );
-  }
-}
-
-class AllTab extends StatelessWidget {
-  const AllTab({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text(
-        'All Transactions Page',
-        style: TextStyle(fontSize: 20),
       ),
     );
   }
