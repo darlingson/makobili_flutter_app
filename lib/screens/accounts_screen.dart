@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:makobili/components/add_account_form.dart';
 import 'package:makobili/models/account.dart';
+import 'package:makobili/themes/theme_provider.dart';
 import 'package:makobili/utils/database_helper.dart';
+import 'package:provider/provider.dart';
 
 class AccountsScreen extends StatefulWidget {
   const AccountsScreen({Key? key});
@@ -92,13 +94,11 @@ class AccountCard extends StatelessWidget {
     return SizedBox(
       width: 350,
       child: Card(
-        color: Colors.blue[100],
-        elevation: 5,
+        color: Provider.of<ThemeProvider>(context).themeData.primaryColor,
         margin: const EdgeInsets.all(8),
         shape: RoundedRectangleBorder(
-          borderRadius:
-              BorderRadius.circular(4.0), // Small radius for minimal rounding
-          side: const BorderSide(color: Colors.black87, width: 1.0), // Border
+          borderRadius: BorderRadius.circular(4.0),
+          side: const BorderSide(color: Colors.black87, width: 1.0),
         ),
         child: Padding(
           padding: const EdgeInsets.all(8.0),
