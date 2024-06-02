@@ -46,7 +46,7 @@ class _ThisMonthTabState extends State<ThisMonthTab> {
                     ? Colors.green
                     : Colors.red,
                 child: ListTile(
-                  visualDensity: VisualDensity(
+                  visualDensity: const VisualDensity(
                     horizontal: 0,
                     vertical: -4,
                   ),

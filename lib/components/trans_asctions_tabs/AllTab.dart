@@ -39,7 +39,7 @@ class _AllTabState extends State<AllTab> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
+        SizedBox(
           height: 100, // Explicit height constraint for the horizontal ListView
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
@@ -49,7 +49,7 @@ class _AllTabState extends State<AllTab> {
                 elevation: 5,
                 margin: const EdgeInsets.all(10),
                 child: ListTile(
-                  visualDensity: VisualDensity(
+                  visualDensity: const VisualDensity(
                     horizontal: 0,
                     vertical: -4,
                   ),
@@ -70,7 +70,7 @@ class _AllTabState extends State<AllTab> {
                     ? Colors.green
                     : Colors.red,
                 child: ListTile(
-                  visualDensity: VisualDensity(
+                  visualDensity: const VisualDensity(
                     horizontal: 0,
                     vertical: -4,
                   ),

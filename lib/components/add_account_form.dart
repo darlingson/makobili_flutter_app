@@ -4,6 +4,8 @@ import '../models/institution.dart';
 import '../utils/database_helper.dart';
 
 class AddAccountForm extends StatefulWidget {
+  const AddAccountForm({super.key});
+
   @override
   _AddAccountFormState createState() => _AddAccountFormState();
 }
@@ -28,7 +30,6 @@ class _AddAccountFormState extends State<AddAccountForm> {
     final institutions = await DatabaseHelper.instance.fetchInstitutions();
     setState(() {
       _institutions = institutions;
-      print('institutions: $_institutions');
     });
   }
 
@@ -61,7 +62,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
           child: Column(
             children: <Widget>[
               TextFormField(
-                decoration: InputDecoration(labelText: 'Name'),
+                decoration: const InputDecoration(labelText: 'Name'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the account name';
@@ -73,7 +74,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Account Number'),
+                decoration: const InputDecoration(labelText: 'Account Number'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the account number';
@@ -85,7 +86,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                 },
               ),
               DropdownButtonFormField<String>(
-                decoration: InputDecoration(labelText: 'Institution'),
+                decoration: const InputDecoration(labelText: 'Institution'),
                 value: _selectedInstitution,
                 items: _institutions.map((Institution institution) {
                   return DropdownMenuItem<String>(
@@ -109,7 +110,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Type'),
+                decoration: const InputDecoration(labelText: 'Type'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the account type';
@@ -121,7 +122,7 @@ class _AddAccountFormState extends State<AddAccountForm> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Balance'),
+                decoration: const InputDecoration(labelText: 'Balance'),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -133,10 +134,10 @@ class _AddAccountFormState extends State<AddAccountForm> {
                   _balance = double.parse(value!);
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _saveAccount,
-                child: Text('Add Account'),
+                child: const Text('Add Account'),
               ),
             ],
           ),

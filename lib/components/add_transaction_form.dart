@@ -39,7 +39,6 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
 
   Future<void> _fetchAccounts() async {
     final accounts = await DatabaseHelper.instance.fetchAccounts();
-    print(accounts[0].toJson());
     setState(() {
       _accountIDs = accounts;
     });
@@ -75,10 +74,9 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
           child: Column(
             children: <Widget>[
               DropdownButtonFormField<String>(
-                decoration: InputDecoration(labelText: 'Accounts'),
+                decoration: const InputDecoration(labelText: 'Accounts'),
                 value: _accountId,
                 items: _accountIDs.map((Account account) {
-                  print('category: $account');
                   return DropdownMenuItem<String>(
                     value: account.id,
                     child: Text(account.name),
@@ -100,7 +98,7 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Description'),
+                decoration: const InputDecoration(labelText: 'Description'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a description';
@@ -112,7 +110,7 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Amount'),
+                decoration: const InputDecoration(labelText: 'Amount'),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -125,7 +123,7 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                 },
               ),
               DropdownButtonFormField<String>(
-                decoration: InputDecoration(labelText: 'Category'),
+                decoration: const InputDecoration(labelText: 'Category'),
                 value: _selectedCategory,
                 items: _categories.map((Category category) {
                   return DropdownMenuItem<String>(
@@ -149,7 +147,7 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Direction'),
+                decoration: const InputDecoration(labelText: 'Direction'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the transaction direction';
@@ -161,7 +159,7 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                 },
               ),
               TextFormField(
-                decoration: InputDecoration(labelText: 'Date'),
+                decoration: const InputDecoration(labelText: 'Date'),
                 controller:
                     TextEditingController(text: _dateFormat.format(_date)),
                 readOnly: true,
@@ -172,16 +170,17 @@ class _AddTransactionFormState extends State<AddTransactionForm> {
                     firstDate: DateTime(2000),
                     lastDate: DateTime(2101),
                   );
-                  if (pickedDate != null && pickedDate != _date)
+                  if (pickedDate != null && pickedDate != _date) {
                     setState(() {
                       _date = pickedDate;
                     });
+                  }
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _saveTransaction,
-                child: Text('Add Transaction'),
+                child: const Text('Add Transaction'),
               ),
             ],
           ),

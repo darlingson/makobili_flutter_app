@@ -25,7 +25,6 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
   Future<void> _fetchTransactions() async {
     final transactions = await DatabaseHelper.instance
         .fetchTransactionsByAccountId(widget.account.id);
-    print(transactions);
     setState(() {
       _transactions = transactions;
     });
@@ -35,7 +34,7 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(""),
+        title: const Text(""),
         backgroundColor: Theme.of(context).primaryColor,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),

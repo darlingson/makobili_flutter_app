@@ -52,11 +52,11 @@ class _MyHomePageState extends State<MyHomePage> {
   int _selectedIndex = 0;
 
   // List of widgets to show in the body based on selected tab
-  static List<Widget> _widgetOptions = <Widget>[
-    HomeScreen(),
-    AccountsScreen(),
-    TransactionsScreen(),
-    ReportsScreen(),
+  static final List<Widget> _widgetOptions = <Widget>[
+    const HomeScreen(),
+    const AccountsScreen(),
+    const TransactionsScreen(),
+    const ReportsScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -69,7 +69,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Finance Tracker'),
+        title: const Text('Finance Tracker'),
       ),
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),

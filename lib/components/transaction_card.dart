@@ -21,16 +21,16 @@ class TransActionCard extends StatelessWidget {
         child: Card(
             color: Colors.blue[100], // Light blue card color for the theme
             child: Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Text('Account Number: $accountNumber',
-                        style: TextStyle(fontSize: 16)),
+                        style: const TextStyle(fontSize: 16)),
                     Text('Institution: $institution',
-                        style: TextStyle(fontSize: 16)),
+                        style: const TextStyle(fontSize: 16)),
                     Text('Account Type: $accountType',
-                        style: TextStyle(fontSize: 16))
+                        style: const TextStyle(fontSize: 16))
                   ]),
             )));
   }
