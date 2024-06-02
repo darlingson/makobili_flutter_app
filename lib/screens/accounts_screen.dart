@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:makobili/components/add_account_form.dart';
 import 'package:makobili/models/account.dart';
+import 'package:makobili/screens/account_info_scrren.dart';
 import 'package:makobili/themes/theme_provider.dart';
 import 'package:makobili/utils/database_helper.dart';
 import 'package:provider/provider.dart';
@@ -59,13 +60,22 @@ class _AccountsScreenState extends State<AccountsScreen> {
       ),
       body: ListView.builder(
         itemBuilder: (context, index) {
-          return AccountCard(
-            index: index,
-            accountName: _accounts[index].name,
-            accountNumber: _accounts[index].accountNumber,
-            institution: _accounts[index].institution,
-            accountType: _accounts[index].type,
-          );
+          return GestureDetector(
+              onTap: () {
+                // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                //     content:
+                //         Text('Account' + _accounts[index].name + ' clicled')));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) =>
+                        AccountInfoScreen(account: _accounts[index])));
+              },
+              child: AccountCard(
+                index: index,
+                accountName: _accounts[index].name,
+                accountNumber: _accounts[index].accountNumber,
+                institution: _accounts[index].institution,
+                accountType: _accounts[index].type,
+              ));
         },
         itemCount: _accounts.length,
       ),
