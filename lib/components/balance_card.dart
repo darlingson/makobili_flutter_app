@@ -18,34 +18,55 @@ class BalanceCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       width: 350,
-      child: Card(
-        color: Colors.blue[100],
-        elevation: 5,
-        margin: const EdgeInsets.all(8),
-        shape: RoundedRectangleBorder(
-          borderRadius:
-              BorderRadius.circular(4.0), // Small radius for minimal rounding
-          side: const BorderSide(color: Colors.black87, width: 1.0), // Border
+      margin: const EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Colors.blue.shade900, Colors.blue.shade300],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
         ),
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text('Account Name: $accountName',
-                  style: const TextStyle(fontSize: 16)),
-              Text('Account Number: $accountNumber',
-                  style: const TextStyle(fontSize: 16)),
-              Text('Institution: $institution',
-                  style: const TextStyle(fontSize: 16)),
-              Text('Account Type: $accountType',
-                  style: const TextStyle(fontSize: 16)),
-            ],
+        borderRadius: BorderRadius.circular(16),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.3),
+            spreadRadius: 1,
+            blurRadius: 5,
+            offset: Offset(0, 3), // changes position of shadow
           ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Icon(Icons.credit_card, color: Colors.white70, size: 24),
+            SizedBox(height: 10),
+            Text('Account Name: $accountName',
+                style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold)),
+            SizedBox(height: 5),
+            Text('Account Number: ${_formatAccountNumber(accountNumber)}',
+                style: TextStyle(fontSize: 16, color: Colors.white)),
+            SizedBox(height: 5),
+            Text('Institution: $institution',
+                style: TextStyle(fontSize: 16, color: Colors.white)),
+            SizedBox(height: 5),
+            Text('Account Type: $accountType',
+                style: TextStyle(fontSize: 16, color: Colors.white)),
+          ],
         ),
       ),
     );
+  }
+
+  // Helper function to format account number like an ATM card number
+  String _formatAccountNumber(String number) {
+    return number.replaceAllMapped(
+        RegExp(r".{4}"), (match) => "${match.group(0)} ");
   }
 }
