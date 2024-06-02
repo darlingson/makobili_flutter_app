@@ -14,21 +14,14 @@ class _ThisMonthTabState extends State<ThisMonthTab> {
 
   Future<void> _fetchTransactions() async {
     final transactions = await DatabaseHelper.instance.fetchTransactions();
-    //iterate through the list of transactions and only keep those that are from this month
-    List<BankTransaction> filteredTransactions = [];
-    for (var transaction in transactions) {
-      if (transaction.date.month == DateTime.now().month) {
-        filteredTransactions.add(transaction);
-      }
-    }
+    List<BankTransaction> filteredTransactions =
+        transactions.where((transaction) {
+      return transaction.date.month == DateTime.now().month &&
+          transaction.date.year == DateTime.now().year;
+    }).toList();
 
-    if (filteredTransactions.isNotEmpty) {
-      _transactions = filteredTransactions;
-    } else {
-      _transactions = [];
-    }
     setState(() {
-      _transactions = transactions;
+      _transactions = filteredTransactions;
     });
   }
 
@@ -40,8 +33,10 @@ class _ThisMonthTabState extends State<ThisMonthTab> {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-        child: ListView.builder(
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
             itemCount: _transactions.length,
             itemBuilder: (context, index) {
               return Card(
@@ -60,6 +55,10 @@ class _ThisMonthTabState extends State<ThisMonthTab> {
                   subtitle: Text(_transactions[index].amount.toString()),
                 ),
               );
-            }));
+            },
+          ),
+        ),
+      ],
+    );
   }
 }
