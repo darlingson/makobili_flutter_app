@@ -5,7 +5,6 @@ import 'package:makobili/components/transactions_card.dart';
 import 'package:makobili/models/account.dart';
 import 'package:makobili/models/transaction.dart';
 import 'package:makobili/utils/database_helper.dart';
-import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
