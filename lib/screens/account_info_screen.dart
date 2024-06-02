@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:makobili/components/balance_card.dart';
+import 'package:makobili/components/transactions_card.dart';
 import 'package:makobili/models/account.dart';
 import 'package:makobili/models/transaction.dart';
 import 'package:makobili/utils/database_helper.dart';
@@ -14,6 +15,7 @@ class AccountInfoScreen extends StatefulWidget {
 
 class _AccountInfoScreenState extends State<AccountInfoScreen> {
   List<BankTransaction> _transactions = [];
+  List<BankTransaction> _filterTransactions = [];
   DateTime now = DateTime.now();
 
   @override
@@ -27,7 +29,29 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
         .fetchTransactionsByAccountId(widget.account.id);
     setState(() {
       _transactions = transactions;
+      _filterTransactions = getFilteredTransactions('all');
     });
+  }
+
+  List<BankTransaction> getFilteredTransactions(String filter) {
+    switch (filter) {
+      case 'all':
+        return _transactions;
+      case 'thisMonth':
+        return _transactions
+            .where((transaction) => transaction.date.month == now.month)
+            .toList();
+      case 'in':
+        return _transactions
+            .where((transaction) => transaction.direction == 'in')
+            .toList();
+      case 'out':
+        return _transactions
+            .where((transaction) => transaction.direction == 'out')
+            .toList();
+      default:
+        return _transactions;
+    }
   }
 
   @override
@@ -44,6 +68,7 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
         ),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 10),
@@ -55,51 +80,69 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
               accountType: widget.account.type,
             ),
           ),
-          SizedBox(
-            width: 350,
-            child: Text(
-              "Balance: ${widget.account.balance}",
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
-          const SizedBox(
-            height: 20,
-            child: Text(
-              "Transactions",
-              textAlign: TextAlign.start,
-            ),
-          ),
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                ElevatedButton(
+                  onPressed: () {
+                    print(getFilteredTransactions('all'));
+                    setState(() {
+                      _filterTransactions = getFilteredTransactions('all');
+                    });
+                  },
+                  child: const Text('All'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      print(getFilteredTransactions('thisMonth'));
+                      _filterTransactions =
+                          getFilteredTransactions('thisMonth');
+                    });
+                  },
+                  child: const Text('This Month'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      _filterTransactions = getFilteredTransactions('in');
+                    });
+                  },
+                  child: const Text('In'),
+                ),
+                ElevatedButton(
+                  onPressed: () {
+                    setState(() {
+                      _filterTransactions = getFilteredTransactions('out');
+                    });
+                  },
+                  child: const Text('Out'),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 20),
+          const Padding(
+            padding: EdgeInsets.symmetric(horizontal: 16.0),
             child: Divider(
-              color: Theme.of(context).primaryColor,
+              color: Colors.grey,
             ),
           ),
           Expanded(
             child: ListView.builder(
-              itemCount: _transactions.length,
+              itemCount: _filterTransactions.length,
               itemBuilder: (context, index) {
-                return Card(
-                  elevation: 5,
-                  margin: const EdgeInsets.all(10),
-                  color: _transactions[index].direction == 'in'
-                      ? Colors.green
-                      : Colors.red,
-                  child: ListTile(
-                    visualDensity: const VisualDensity(
-                      horizontal: 0,
-                      vertical: -4,
-                    ),
-                    leading: Text(_transactions[index].direction),
-                    title: Text(_transactions[index].description),
-                    subtitle: Text(_transactions[index].amount.toString()),
-                    trailing: Text(DateFormat('yyyy-MM-dd – kk:mm')
-                        .format(_transactions[index].date)),
-                  ),
+                return TransactionsCard(
+                  direction: _filterTransactions[index].direction,
+                  description: _filterTransactions[index].description,
+                  amount: _filterTransactions[index].amount,
+                  date: _filterTransactions[index].date,
                 );
               },
             ),
-          )
+          ),
         ],
       ),
     );
