@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:makobili/components/balance_card.dart';
 import 'package:makobili/components/homescreen_add_actions_dialog.dart';
+import 'package:makobili/components/transactions_card.dart';
 import 'package:makobili/models/account.dart';
 import 'package:makobili/models/transaction.dart';
 import 'package:makobili/utils/database_helper.dart';
@@ -107,24 +108,11 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ListView.builder(
                 itemCount: _transactions.length,
                 itemBuilder: (context, index) {
-                  return Card(
-                    elevation: 5,
-                    margin: const EdgeInsets.all(10),
-                    color: _transactions[index].direction == 'in'
-                        ? Colors.green
-                        : Colors.red,
-                    child: ListTile(
-                      visualDensity: const VisualDensity(
-                        horizontal: 0,
-                        vertical: -4,
-                      ),
-                      leading: Text(_transactions[index].direction),
-                      title: Text(_transactions[index].description),
-                      subtitle: Text(_transactions[index].amount.toString()),
-                      trailing: Text(DateFormat('yyyy-MM-dd – kk:mm')
-                          .format(_transactions[index].date)),
-                    ),
-                  );
+                  return TransactionsCard(
+                      direction: _transactions[index].direction,
+                      description: _transactions[index].description,
+                      amount: _transactions[index].amount,
+                      date: _transactions[index].date);
                 },
               ),
             ),
