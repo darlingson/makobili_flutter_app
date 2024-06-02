@@ -102,58 +102,51 @@ class AccountCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-      child: InkWell(
-        onTap: () {
-          // Navigator.of(context).push(MaterialPageRoute(
-          //   builder: (context) => AccountInfoScreen(account: Account(index, accountName, accountNumber, institution, accountType)),
-          // ));
-        },
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8.0),
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [Colors.blue.shade300, Colors.blue.shade500],
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8.0),
+          gradient: LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Colors.blue.shade300, Colors.blue.shade500],
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.grey.withOpacity(0.5),
+              spreadRadius: 2,
+              blurRadius: 5,
+              offset: const Offset(0, 3),
             ),
-            boxShadow: [
-              BoxShadow(
-                color: Colors.grey.withOpacity(0.5),
-                spreadRadius: 2,
-                blurRadius: 5,
-                offset: const Offset(0, 3),
+          ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                'Account Name: $accountName',
+                style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Account Number: $accountNumber',
+                style: const TextStyle(fontSize: 14, color: Colors.white),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Institution: $institution',
+                style: const TextStyle(fontSize: 14, color: Colors.white),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'Account Type: $accountType',
+                style: const TextStyle(fontSize: 14, color: Colors.white),
               ),
             ],
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text(
-                  'Account Name: $accountName',
-                  style: const TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Account Number: $accountNumber',
-                  style: const TextStyle(fontSize: 14, color: Colors.white),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Institution: $institution',
-                  style: const TextStyle(fontSize: 14, color: Colors.white),
-                ),
-                const SizedBox(height: 8),
-                Text(
-                  'Account Type: $accountType',
-                  style: const TextStyle(fontSize: 14, color: Colors.white),
-                ),
-              ],
-            ),
           ),
         ),
       ),
