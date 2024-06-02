@@ -15,9 +15,9 @@ class HomeScreenAddActionsDialog extends StatelessWidget {
             title: const Text('Add'),
             bottom: const TabBar(
               tabs: [
-                Tab(text: 'Categories'),
-                Tab(text: 'Account'),
                 Tab(text: 'Transaction'),
+                Tab(text: 'Account'),
+                Tab(text: 'Categories'),
               ],
             ),
           ),
