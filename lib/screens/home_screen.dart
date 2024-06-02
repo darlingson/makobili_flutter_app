@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:makobili/components/balance_card.dart';
-import 'package:makobili/components/transaction_card.dart';
 import 'package:makobili/models/account.dart';
 import 'package:makobili/models/transaction.dart';
 import 'package:makobili/utils/database_helper.dart';
+import 'package:intl/intl.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   List<Account> _accounts = [];
   List<BankTransaction> _transactions = [];
-
+  DateTime now = DateTime.now();
   Future<void> _getAccounts() async {
     var accounts = await DatabaseHelper.instance.fetchAccounts();
     setState(() {
@@ -41,6 +41,19 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const SizedBox(
+          height: 20,
+          child: Text(
+            "Accounts",
+            textAlign: TextAlign.start,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Divider(
+            color: Theme.of(context).primaryColor,
+          ),
+        ),
         SizedBox(
           height: 200,
           child: ListView.builder(
@@ -57,6 +70,19 @@ class _HomeScreenState extends State<HomeScreen> {
             },
           ),
         ),
+        const SizedBox(
+          height: 20,
+          child: Text(
+            "Recent Transactions",
+            textAlign: TextAlign.start,
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Divider(
+            color: Theme.of(context).primaryColor,
+          ),
+        ),
         Expanded(
           child: ListView.builder(
             itemCount: _transactions.length,
@@ -68,13 +94,15 @@ class _HomeScreenState extends State<HomeScreen> {
                     ? Colors.green
                     : Colors.red,
                 child: ListTile(
-                  visualDensity: VisualDensity(
+                  visualDensity: const VisualDensity(
                     horizontal: 0,
                     vertical: -4,
                   ),
                   leading: Text(_transactions[index].direction),
                   title: Text(_transactions[index].description),
                   subtitle: Text(_transactions[index].amount.toString()),
+                  trailing: Text(DateFormat('yyyy-MM-dd – kk:mm')
+                      .format(_transactions[index].date)),
                 ),
               );
             },
