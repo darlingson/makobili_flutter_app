@@ -1,9 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:makobili/components/balance_card.dart';
 import 'package:makobili/components/transaction_card.dart';
+import 'package:makobili/models/account.dart';
+import 'package:makobili/models/transaction.dart';
+import 'package:makobili/utils/database_helper.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  List<Account> _accounts = [];
+  List<BankTransaction> _transactions = [];
+
+  Future<void> _getAccounts() async {
+    var accounts = await DatabaseHelper.instance.fetchAccounts();
+    setState(() {
+      _accounts = accounts;
+    });
+  }
+
+  Future<void> _getTransactions() async {
+    var transactions = await DatabaseHelper.instance.fetchTransactions();
+    setState(() {
+      _transactions = transactions;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _getAccounts();
+    _getTransactions();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,30 +45,39 @@ class HomeScreen extends StatelessWidget {
           height: 200,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: 10,
+            itemCount: _accounts.length,
             itemBuilder: (context, index) {
               return BalanceCard(
                 index: index,
-                accountName: 'Account ${index + 1}',
-                accountNumber: '1234 5678 9012 345${index + 1}',
-                institution: 'Bank ${index + 1}',
-                accountType: 'Savings',
+                accountName: _accounts[index].name,
+                accountNumber: _accounts[index].accountNumber,
+                institution: _accounts[index].institution,
+                accountType: _accounts[index].type,
               );
             },
           ),
         ),
         Expanded(
           child: ListView.builder(
+            itemCount: _transactions.length,
             itemBuilder: (context, index) {
-              return TransActionCard(
-                accountNumber: '1234 5678 9012 345${index + 1}',
-                institution: 'Bank ${index + 1}',
-                accountType: 'Savings',
-                amount: 'Account ${index + 1}',
-                transactionDirection: "out",
+              return Card(
+                elevation: 5,
+                margin: const EdgeInsets.all(10),
+                color: _transactions[index].direction == 'in'
+                    ? Colors.green
+                    : Colors.red,
+                child: ListTile(
+                  visualDensity: VisualDensity(
+                    horizontal: 0,
+                    vertical: -4,
+                  ),
+                  leading: Text(_transactions[index].direction),
+                  title: Text(_transactions[index].description),
+                  subtitle: Text(_transactions[index].amount.toString()),
+                ),
               );
             },
-            itemCount: 10,
           ),
         ),
       ],
