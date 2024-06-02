@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:makobili/components/balance_card.dart';
+import 'package:makobili/components/edit_transaction_form.dart';
 import 'package:makobili/components/transactions_card.dart';
 import 'package:makobili/models/account.dart';
 import 'package:makobili/models/transaction.dart';
@@ -97,7 +97,6 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                 ElevatedButton(
                   onPressed: () {
                     setState(() {
-                      print(getFilteredTransactions('thisMonth'));
                       _filterTransactions =
                           getFilteredTransactions('thisMonth');
                     });
@@ -134,12 +133,24 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
             child: ListView.builder(
               itemCount: _filterTransactions.length,
               itemBuilder: (context, index) {
-                return TransactionsCard(
-                  direction: _filterTransactions[index].direction,
-                  description: _filterTransactions[index].description,
-                  amount: _filterTransactions[index].amount,
-                  date: _filterTransactions[index].date,
-                );
+                return GestureDetector(
+                    onTap: () {
+                      showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              content: EditTransactionForm(
+                                transaction: _filterTransactions[index],
+                              ),
+                            );
+                          });
+                    },
+                    child: TransactionsCard(
+                      direction: _filterTransactions[index].direction,
+                      description: _filterTransactions[index].description,
+                      amount: _filterTransactions[index].amount,
+                      date: _filterTransactions[index].date,
+                    ));
               },
             ),
           ),
