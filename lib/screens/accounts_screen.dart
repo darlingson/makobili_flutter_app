@@ -24,7 +24,6 @@ class _AccountsScreenState extends State<AccountsScreen> {
 
   Future<void> _fetchAccounts() async {
     final accounts = await DatabaseHelper.instance.fetchAccounts();
-    print('accounts: $accounts');
     setState(() {
       _accounts = accounts;
     });
@@ -36,7 +35,7 @@ class _AccountsScreenState extends State<AccountsScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
             title: const Text('Add Transaction'),
-            content: AddAccountForm(),
+            content: const AddAccountForm(),
             actions: <Widget>[
               TextButton(
                 onPressed: () {
