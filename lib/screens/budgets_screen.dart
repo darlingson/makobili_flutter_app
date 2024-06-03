@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:makobili/components/add_budgets_form.dart';
 
 class BudgetsScreen extends StatefulWidget {
   const BudgetsScreen({super.key});
@@ -8,6 +9,25 @@ class BudgetsScreen extends StatefulWidget {
 }
 
 class _BudgetsScreenState extends State<BudgetsScreen> {
+  void _showAddBudgetDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+            title: const Text('Add Budget'),
+            content: AddBudgetForm(),
+            actions: <Widget>[
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Cancel'),
+              ),
+            ]);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -27,7 +47,7 @@ class _BudgetsScreenState extends State<BudgetsScreen> {
             ),
             floatingActionButton: FloatingActionButton(
               onPressed: () {
-                // _showAddTransactionDialog(context);
+                _showAddBudgetDialog(context);
               },
               child: const Icon(Icons.add),
             ),

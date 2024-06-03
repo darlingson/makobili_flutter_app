@@ -3,12 +3,12 @@ import '../utils/database_helper.dart';
 import '../models/budget.dart';
 import '../models/category.dart';
 
-class AddBudgetScreen extends StatefulWidget {
+class AddBudgetForm extends StatefulWidget {
   @override
-  _AddBudgetScreenState createState() => _AddBudgetScreenState();
+  _AddBudgetFormState createState() => _AddBudgetFormState();
 }
 
-class _AddBudgetScreenState extends State<AddBudgetScreen> {
+class _AddBudgetFormState extends State<AddBudgetForm> {
   final _formKey = GlobalKey<FormState>();
   final _amountController = TextEditingController();
   final _monthController = TextEditingController();
