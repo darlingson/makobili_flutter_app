@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:makobili/components/add_budgets_form.dart';
+import 'package:makobili/components/budgets_screen_tabs/AllBudgetsTab.dart';
+import 'package:makobili/components/budgets_screen_tabs/ThisMonthBudgetsTab.dart';
 
 class BudgetsScreen extends StatefulWidget {
   const BudgetsScreen({super.key});
@@ -60,20 +62,20 @@ class _BudgetsScreenState extends State<BudgetsScreen> {
   }
 }
 
-class ThisMonthBudgetsTab extends StatelessWidget {
-  const ThisMonthBudgetsTab({super.key});
+// class ThisMonthBudgetsTab extends StatelessWidget {
+//   const ThisMonthBudgetsTab({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container();
+//   }
+// }
 
-class AllBudgetsTab extends StatelessWidget {
-  const AllBudgetsTab({super.key});
+// class AllBudgetsTab extends StatelessWidget {
+//   const AllBudgetsTab({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Container();
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container();
+//   }
+// }
