@@ -4,6 +4,7 @@ import 'package:makobili/components/homescreen_add_actions_dialog.dart';
 import 'package:makobili/components/transactions_card.dart';
 import 'package:makobili/models/account.dart';
 import 'package:makobili/models/transaction.dart';
+import 'package:makobili/screens/account_info_screen.dart';
 import 'package:makobili/utils/database_helper.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -80,13 +81,22 @@ class _HomeScreenState extends State<HomeScreen> {
                 scrollDirection: Axis.horizontal,
                 itemCount: _accounts.length,
                 itemBuilder: (context, index) {
-                  return BalanceCard(
-                    index: index,
-                    accountName: _accounts[index].name,
-                    accountNumber: _accounts[index].accountNumber,
-                    institution: _accounts[index].institution,
-                    accountType: _accounts[index].type,
-                  );
+                  return GestureDetector(
+                      onTap: () {
+                        // ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        //     content:
+                        //         Text('Account' + _accounts[index].name + ' clicled')));
+                        Navigator.of(context).push(MaterialPageRoute(
+                            builder: (context) =>
+                                AccountInfoScreen(account: _accounts[index])));
+                      },
+                      child: BalanceCard(
+                        index: index,
+                        accountName: _accounts[index].name,
+                        accountNumber: _accounts[index].accountNumber,
+                        institution: _accounts[index].institution,
+                        accountType: _accounts[index].type,
+                      ));
                 },
               ),
             ),

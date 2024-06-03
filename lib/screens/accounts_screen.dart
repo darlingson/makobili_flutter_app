@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:makobili/components/add_account_form.dart';
 import 'package:makobili/models/account.dart';
 import 'package:makobili/screens/account_info_screen.dart';
-import 'package:makobili/themes/theme_provider.dart';
 import 'package:makobili/utils/database_helper.dart';
-import 'package:provider/provider.dart';
 
 class AccountsScreen extends StatefulWidget {
   const AccountsScreen({Key? key});
@@ -34,7 +32,7 @@ class _AccountsScreenState extends State<AccountsScreen> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-            title: const Text('Add Transaction'),
+            title: const Text('Add Account'),
             content: const AddAccountForm(),
             actions: <Widget>[
               TextButton(
