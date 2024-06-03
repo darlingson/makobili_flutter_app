@@ -4,6 +4,7 @@ import '../models/account.dart';
 import '../models/transaction.dart';
 import '../models/category.dart';
 import '../models/institution.dart';
+import '../models/budget.dart';
 
 class DatabaseHelper {
   static final DatabaseHelper instance = DatabaseHelper._init();
@@ -67,6 +68,16 @@ class DatabaseHelper {
         type TEXT
       )
     ''');
+    await db.execute('''
+  CREATE TABLE budgets(
+    id TEXT PRIMARY KEY,
+    categoryId TEXT,
+    amount REAL,
+    month INTEGER,
+    year INTEGER,
+    FOREIGN KEY (categoryId) REFERENCES categories(id) ON DELETE CASCADE
+  )
+''');
     await _insertInitialData(db);
   }
 
@@ -85,6 +96,12 @@ class DatabaseHelper {
       Category(id: '1', name: 'Food'),
       Category(id: '2', name: 'Entertainment'),
       Category(id: '3', name: 'Utilities'),
+      Category(id: '4', name: 'Transportation'),
+      Category(id: '5', name: 'Clothes'),
+      Category(id: '6', name: 'Self Care'),
+      Category(id: '7', name: 'Health'),
+      Category(id: '8', name: 'Education'),
+      Category(id: '9', name: 'Groceries'),
     ];
 
     // Insert institutions
@@ -218,6 +235,34 @@ class DatabaseHelper {
   Future<void> deleteInstitution(String id) async {
     final db = await instance.database;
     await db.delete('institutions', where: 'id = ?', whereArgs: [id]);
+  }
+
+  // Insert Budget
+  Future<void> insertBudget(Budget budget) async {
+    final db = await instance.database;
+    await db.insert('budgets', budget.toJson(),
+        conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
+// Fetch all budgets
+  Future<List<Budget>> fetchBudgets() async {
+    final db = await instance.database;
+    final result = await db.query('budgets');
+
+    return result.map((json) => Budget.fromJson(json)).toList();
+  }
+
+// Update Budget
+  Future<void> updateBudget(Budget budget) async {
+    final db = await instance.database;
+    await db.update('budgets', budget.toJson(),
+        where: 'id = ?', whereArgs: [budget.id]);
+  }
+
+// Delete Budget
+  Future<void> deleteBudget(String id) async {
+    final db = await instance.database;
+    await db.delete('budgets', where: 'id = ?', whereArgs: [id]);
   }
 
   Future close() async {
