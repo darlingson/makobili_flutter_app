@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/budget.dart';
 import '../utils/database_helper.dart';
-import '../models/category.dart';
 
 class BudgetCard extends StatefulWidget {
   final Budget budget;
@@ -13,8 +12,6 @@ class BudgetCard extends StatefulWidget {
 }
 
 class _BudgetCardState extends State<BudgetCard> {
-  List<Category> _categories = [];
-
   Future<String> _getCategoryName(String categoryId) async {
     final categories = await DatabaseHelper.instance.fetchCategories();
     final category =
