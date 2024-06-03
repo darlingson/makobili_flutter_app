@@ -16,6 +16,8 @@ class AccountInfoScreen extends StatefulWidget {
 class _AccountInfoScreenState extends State<AccountInfoScreen> {
   List<BankTransaction> _transactions = [];
   List<BankTransaction> _filterTransactions = [];
+  final filterArray = [0, 1, 2, 3];
+  var currentFilterIndex = 0;
   DateTime now = DateTime.now();
 
   @override
@@ -87,37 +89,68 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
               children: [
                 ElevatedButton(
                   onPressed: () {
-                    print(getFilteredTransactions('all'));
                     setState(() {
                       _filterTransactions = getFilteredTransactions('all');
+                      currentFilterIndex = 0;
                     });
                   },
                   child: const Text('All'),
+                  style: currentFilterIndex == 0
+                      ? ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.blue))
+                      : ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.white)),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     setState(() {
                       _filterTransactions =
                           getFilteredTransactions('thisMonth');
+                      currentFilterIndex = 1;
                     });
                   },
                   child: const Text('This Month'),
+                  style: currentFilterIndex == 1
+                      ? ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.blue))
+                      : ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.white)),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     setState(() {
                       _filterTransactions = getFilteredTransactions('in');
+                      currentFilterIndex = 2;
                     });
                   },
                   child: const Text('In'),
+                  style: currentFilterIndex == 2
+                      ? ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.blue))
+                      : ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.white)),
                 ),
                 ElevatedButton(
                   onPressed: () {
                     setState(() {
                       _filterTransactions = getFilteredTransactions('out');
+                      currentFilterIndex = 3;
                     });
                   },
                   child: const Text('Out'),
+                  style: currentFilterIndex == 3
+                      ? ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.blue))
+                      : ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.white)),
                 ),
               ],
             ),
