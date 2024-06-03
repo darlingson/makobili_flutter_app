@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:makobili/screens/accounts_screen.dart';
+import 'package:makobili/screens/budgets_screen.dart';
 import 'package:makobili/screens/home_screen.dart';
 import 'package:makobili/screens/reports_screen.dart';
 import 'package:makobili/screens/transactions_screen.dart';
@@ -55,7 +56,8 @@ class _MyHomePageState extends State<MyHomePage> {
   static final List<Widget> _widgetOptions = <Widget>[
     const HomeScreen(),
     const AccountsScreen(),
-    const TransactionsScreen(),
+    // const TransactionsScreen(),
+    const BudgetsScreen(),
     const ReportsScreen(),
   ];
 
@@ -85,8 +87,8 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'Accounts',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.shopping_bag_sharp),
-            label: 'Transactions',
+            icon: Icon(Icons.next_plan),
+            label: 'Budgets',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.bar_chart),
