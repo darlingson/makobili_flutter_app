@@ -4,6 +4,8 @@ import '../models/budget.dart';
 import '../models/category.dart';
 
 class AddBudgetForm extends StatefulWidget {
+  const AddBudgetForm({super.key});
+
   @override
   _AddBudgetFormState createState() => _AddBudgetFormState();
 }
@@ -48,7 +50,7 @@ class _AddBudgetFormState extends State<AddBudgetForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Budget'),
+        title: const Text('Add Budget'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -57,7 +59,7 @@ class _AddBudgetFormState extends State<AddBudgetForm> {
           child: ListView(
             children: [
               DropdownButtonFormField<String>(
-                decoration: InputDecoration(labelText: 'Category'),
+                decoration: const InputDecoration(labelText: 'Category'),
                 items: _categories.map((category) {
                   return DropdownMenuItem(
                     value: category.id,
@@ -78,7 +80,7 @@ class _AddBudgetFormState extends State<AddBudgetForm> {
               ),
               TextFormField(
                 controller: _amountController,
-                decoration: InputDecoration(labelText: 'Amount'),
+                decoration: const InputDecoration(labelText: 'Amount'),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -89,7 +91,7 @@ class _AddBudgetFormState extends State<AddBudgetForm> {
               ),
               TextFormField(
                 controller: _monthController,
-                decoration: InputDecoration(labelText: 'Month'),
+                decoration: const InputDecoration(labelText: 'Month'),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -100,7 +102,7 @@ class _AddBudgetFormState extends State<AddBudgetForm> {
               ),
               TextFormField(
                 controller: _yearController,
-                decoration: InputDecoration(labelText: 'Year'),
+                decoration: const InputDecoration(labelText: 'Year'),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -109,10 +111,10 @@ class _AddBudgetFormState extends State<AddBudgetForm> {
                   return null;
                 },
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _saveBudget,
-                child: Text('Save Budget'),
+                child: const Text('Save Budget'),
               ),
             ],
           ),

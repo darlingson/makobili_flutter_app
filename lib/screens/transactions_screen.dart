@@ -13,7 +13,7 @@ class TransactionsScreen extends StatelessWidget {
       builder: (BuildContext context) {
         return AlertDialog(
             title: const Text('Add Transaction'),
-            content: AddTransactionForm(),
+            content: const AddTransactionForm(),
             actions: <Widget>[
               TextButton(
                 onPressed: () {

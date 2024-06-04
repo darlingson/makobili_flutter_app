@@ -17,7 +17,7 @@ class _BudgetsScreenState extends State<BudgetsScreen> {
       builder: (BuildContext context) {
         return AlertDialog(
             title: const Text('Add Budget'),
-            content: AddBudgetForm(),
+            content: const AddBudgetForm(),
             actions: <Widget>[
               TextButton(
                 onPressed: () {

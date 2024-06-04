@@ -94,7 +94,6 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                       currentFilterIndex = 0;
                     });
                   },
-                  child: const Text('All'),
                   style: currentFilterIndex == 0
                       ? ButtonStyle(
                           backgroundColor:
@@ -102,6 +101,7 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                       : ButtonStyle(
                           backgroundColor:
                               MaterialStateProperty.all(Colors.white)),
+                  child: const Text('All'),
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -111,7 +111,6 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                       currentFilterIndex = 1;
                     });
                   },
-                  child: const Text('This Month'),
                   style: currentFilterIndex == 1
                       ? ButtonStyle(
                           backgroundColor:
@@ -119,6 +118,7 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                       : ButtonStyle(
                           backgroundColor:
                               MaterialStateProperty.all(Colors.white)),
+                  child: const Text('This Month'),
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -127,7 +127,6 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                       currentFilterIndex = 2;
                     });
                   },
-                  child: const Text('In'),
                   style: currentFilterIndex == 2
                       ? ButtonStyle(
                           backgroundColor:
@@ -135,6 +134,7 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                       : ButtonStyle(
                           backgroundColor:
                               MaterialStateProperty.all(Colors.white)),
+                  child: const Text('In'),
                 ),
                 ElevatedButton(
                   onPressed: () {
@@ -143,7 +143,6 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                       currentFilterIndex = 3;
                     });
                   },
-                  child: const Text('Out'),
                   style: currentFilterIndex == 3
                       ? ButtonStyle(
                           backgroundColor:
@@ -151,6 +150,7 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                       : ButtonStyle(
                           backgroundColor:
                               MaterialStateProperty.all(Colors.white)),
+                  child: const Text('Out'),
                 ),
               ],
             ),

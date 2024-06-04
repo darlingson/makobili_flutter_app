@@ -205,7 +205,7 @@ class _EditTransactionFormState extends State<EditTransactionForm> {
               ElevatedButton(
                 onPressed: _deleteTransaction,
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.red,
+                  backgroundColor: Colors.red,
                 ),
                 child: const Text('Delete Transaction'),
               ),

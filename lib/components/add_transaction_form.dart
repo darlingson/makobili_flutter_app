@@ -6,6 +6,8 @@ import '../utils/database_helper.dart';
 import 'package:intl/intl.dart';
 
 class AddTransactionForm extends StatefulWidget {
+  const AddTransactionForm({super.key});
+
   @override
   _AddTransactionFormState createState() => _AddTransactionFormState();
 }

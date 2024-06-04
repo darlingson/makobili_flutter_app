@@ -5,7 +5,7 @@ import '../utils/database_helper.dart';
 class BudgetCard extends StatefulWidget {
   final Budget budget;
 
-  BudgetCard({required this.budget});
+  const BudgetCard({super.key, required this.budget});
 
   @override
   State<BudgetCard> createState() => _BudgetCardState();
@@ -25,17 +25,17 @@ class _BudgetCardState extends State<BudgetCard> {
       future: _getCategoryName(widget.budget.categoryId),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return Center(child: Text('Error: ${snapshot.error}'));
         } else if (!snapshot.hasData) {
-          return Center(child: Text('Category not found'));
+          return const Center(child: Text('Category not found'));
         }
 
         String categoryName = snapshot.data!;
 
         return Card(
-          margin: EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+          margin: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15.0),
           ),
@@ -47,17 +47,17 @@ class _BudgetCardState extends State<BudgetCard> {
               children: [
                 Text(
                   categoryName,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 20.0,
                     fontWeight: FontWeight.bold,
                     color: Colors.blueAccent,
                   ),
                 ),
-                SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       'Amount:',
                       style: TextStyle(
                         fontSize: 16.0,
@@ -66,18 +66,18 @@ class _BudgetCardState extends State<BudgetCard> {
                     ),
                     Text(
                       '\$${widget.budget.amount.toStringAsFixed(2)}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       'Month:',
                       style: TextStyle(
                         fontSize: 16.0,
@@ -86,18 +86,18 @@ class _BudgetCardState extends State<BudgetCard> {
                     ),
                     Text(
                       '${widget.budget.month}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                   ],
                 ),
-                SizedBox(height: 10.0),
+                const SizedBox(height: 10.0),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       'Year:',
                       style: TextStyle(
                         fontSize: 16.0,
@@ -106,7 +106,7 @@ class _BudgetCardState extends State<BudgetCard> {
                     ),
                     Text(
                       '${widget.budget.year}',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.w500,
                       ),

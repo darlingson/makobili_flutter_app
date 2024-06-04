@@ -21,11 +21,11 @@ class HomeScreenAddActionsDialog extends StatelessWidget {
               ],
             ),
           ),
-          body: TabBarView(
+          body: const TabBarView(
             children: [
               AddTransactionForm(),
-              const AddAccountForm(),
-              const AddCategoriesForm()
+              AddAccountForm(),
+              AddCategoriesForm()
             ],
           ),
         ));

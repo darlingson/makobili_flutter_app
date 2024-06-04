@@ -33,7 +33,7 @@ class BalanceCard extends StatelessWidget {
             color: Colors.black.withOpacity(0.3),
             spreadRadius: 1,
             blurRadius: 5,
-            offset: Offset(0, 3), // changes position of shadow
+            offset: const Offset(0, 3), // changes position of shadow
           ),
         ],
       ),
@@ -42,22 +42,22 @@ class BalanceCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Icon(Icons.credit_card, color: Colors.white70, size: 24),
-            SizedBox(height: 10),
+            const Icon(Icons.credit_card, color: Colors.white70, size: 24),
+            const SizedBox(height: 10),
             Text('Account Name: $accountName',
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 18,
                     color: Colors.white,
                     fontWeight: FontWeight.bold)),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Text('Account Number: ${_formatAccountNumber(accountNumber)}',
-                style: TextStyle(fontSize: 16, color: Colors.white)),
-            SizedBox(height: 5),
+                style: const TextStyle(fontSize: 16, color: Colors.white)),
+            const SizedBox(height: 5),
             Text('Institution: $institution',
-                style: TextStyle(fontSize: 16, color: Colors.white)),
-            SizedBox(height: 5),
+                style: const TextStyle(fontSize: 16, color: Colors.white)),
+            const SizedBox(height: 5),
             Text('Account Type: $accountType',
-                style: TextStyle(fontSize: 16, color: Colors.white)),
+                style: const TextStyle(fontSize: 16, color: Colors.white)),
           ],
         ),
       ),

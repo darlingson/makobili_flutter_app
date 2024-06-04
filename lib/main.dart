@@ -3,7 +3,6 @@ import 'package:makobili/screens/accounts_screen.dart';
 import 'package:makobili/screens/budgets_screen.dart';
 import 'package:makobili/screens/home_screen.dart';
 import 'package:makobili/screens/reports_screen.dart';
-import 'package:makobili/screens/transactions_screen.dart';
 import 'package:makobili/themes/theme_provider.dart';
 import 'package:makobili/utils/database_helper.dart';
 import 'package:path/path.dart';
