@@ -41,14 +41,33 @@ class _HomeScreenState extends State<HomeScreen> {
 
   void _showAddAccountDialog(BuildContext context) {
     showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return const AlertDialog(
-            title: Text('Add'),
-            content: HomeScreenAddActionsDialog(),
-            contentPadding: EdgeInsets.zero,
-          );
-        });
+      context: context,
+      builder: (BuildContext context) {
+        return Dialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
+          child: Container(
+            padding: const EdgeInsets.all(16.0),
+            constraints: BoxConstraints(
+                maxHeight: MediaQuery.of(context).size.height *
+                    0.8), // Adjust the height as needed
+            child: const Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  'Add',
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(height: 16.0),
+                Expanded(child: HomeScreenAddActionsDialog()),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
   @override

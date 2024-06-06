@@ -9,25 +9,27 @@ class HomeScreenAddActionsDialog extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 3,
-        child: Scaffold(
-          appBar: AppBar(
-            title: const Text('Add'),
-            bottom: const TabBar(
-              tabs: [
-                Tab(text: 'Transaction'),
-                Tab(text: 'Account'),
-                Tab(text: 'Categories'),
+      length: 3,
+      child: Column(
+        children: [
+          const TabBar(
+            tabs: [
+              Tab(text: 'Transaction'),
+              Tab(text: 'Account'),
+              Tab(text: 'Categories'),
+            ],
+          ),
+          const Expanded(
+            child: TabBarView(
+              children: [
+                AddTransactionForm(),
+                AddAccountForm(),
+                AddCategoriesForm(),
               ],
             ),
           ),
-          body: const TabBarView(
-            children: [
-              AddTransactionForm(),
-              AddAccountForm(),
-              AddCategoriesForm()
-            ],
-          ),
-        ));
+        ],
+      ),
+    );
   }
 }
