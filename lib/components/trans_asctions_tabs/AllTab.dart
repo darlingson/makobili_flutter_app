@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:makobili/models/category.dart';
 import 'package:makobili/models/transaction.dart';
 import 'package:makobili/utils/database_helper.dart';
+import 'package:provider/provider.dart';
+
+import '../../state_management/tranasctions_provider.dart';
 
 class AllTab extends StatefulWidget {
   const AllTab({Key? key}) : super(key: key);
@@ -33,6 +36,7 @@ class _AllTabState extends State<AllTab> {
     super.initState();
     _fetchTransactions();
     _fetchCategories();
+    Provider.of<TransActionsProvider>(context, listen: false).fetchTransactions();
   }
 
   @override
@@ -59,25 +63,48 @@ class _AllTabState extends State<AllTab> {
             },
           ),
         ),
+        // Expanded(
+        //   child: ListView.builder(
+        //     itemCount: _transactions.length,
+        //     itemBuilder: (context, index) {
+        //       return Card(
+        //         elevation: 5,
+        //         margin: const EdgeInsets.all(10),
+        //         color: _transactions[index].direction == 'in'
+        //             ? Colors.green
+        //             : Colors.red,
+        //         child: ListTile(
+        //           visualDensity: const VisualDensity(
+        //             horizontal: 0,
+        //             vertical: -4,
+        //           ),
+        //           leading: Text(_transactions[index].direction),
+        //           title: Text(_transactions[index].description),
+        //           subtitle: Text(_transactions[index].amount.toString()),
+        //         ),
+        //       );
+        //     },
+        //   ),
+        // ),
         Expanded(
-          child: ListView.builder(
-            itemCount: _transactions.length,
-            itemBuilder: (context, index) {
-              return Card(
-                elevation: 5,
-                margin: const EdgeInsets.all(10),
-                color: _transactions[index].direction == 'in'
-                    ? Colors.green
-                    : Colors.red,
-                child: ListTile(
-                  visualDensity: const VisualDensity(
-                    horizontal: 0,
-                    vertical: -4,
-                  ),
-                  leading: Text(_transactions[index].direction),
-                  title: Text(_transactions[index].description),
-                  subtitle: Text(_transactions[index].amount.toString()),
-                ),
+          child: Consumer<TransActionsProvider>(
+            builder: (context, provider, child) {
+              return ListView.builder(
+                itemCount: provider.getTransactions().length,
+                itemBuilder: (context, index) {
+                  final transaction = provider.getTransactions()[index];
+                  return Card(
+                    elevation: 5,
+                    margin: const EdgeInsets.all(10),
+                    color: transaction.direction == 'in' ? Colors.green : Colors.red,
+                    child: ListTile(
+                      visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                      leading: Text(transaction.direction),
+                      title: Text(transaction.description),
+                      subtitle: Text(transaction.amount.toString()),
+                    ),
+                  );
+                },
               );
             },
           ),

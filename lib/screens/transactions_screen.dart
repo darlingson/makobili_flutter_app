@@ -21,7 +21,8 @@ class TransactionsScreen extends StatelessWidget {
                 },
                 child: const Text('Cancel'),
               ),
-            ]);
+            ]
+        );
       },
     );
   }
